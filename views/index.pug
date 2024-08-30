@@ -1,0 +1,28 @@
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Phát Video HLS
+    script(src="https://cdn.jsdelivr.net/npm/hls.js@latest")
+  body
+    video#videoPlayer(controls width="600" height="400")
+
+    script.
+      var video = document.getElementById('videoPlayer');
+      var videoSrc = 'https://shajhdsa.hcm.ss.bfcplatform.vn/2024-08-28/playlist.m3u8'; // URL của file playlist.m3u8 trên BizFly Cloud
+
+      if (Hls.isSupported()) {
+          var hls = new Hls();
+          hls.loadSource(videoSrc);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, function() {
+              video.play();
+          });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = videoSrc;
+          video.addEventListener('loadedmetadata', function() {
+              video.play();
+          });
+      } else {
+          console.log('Trình duyệt không hỗ trợ HLS.');
+      }

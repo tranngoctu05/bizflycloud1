@@ -5,13 +5,14 @@ const fs = require('fs');
 const hls = require('hls-server');
 
 const app = express();
-const port = process.env.PORT || 3000;  // Cài đặt cổng mặc định hoặc lấy từ biến môi trường
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.get('/', (req, res) => {
-    return res.status(200).sendFile(`${__dirname}/client.html`);
+    res.render('index'); 
 });
-
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, '../views'));
 app.use(function (err, req, res, next) {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -19,7 +20,6 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-app.use(express.static(path.join(__dirname, './../output/2024-08-28')));
 
 
-module.exports = app;  // Chỉ export ứng dụng Express, không khởi tạo server tại đây
+module.exports = app;
