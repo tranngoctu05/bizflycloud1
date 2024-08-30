@@ -1,0 +1,12 @@
+  version: '3.8'
+
+  services:
+    hls_bizflycloud:
+      image: trantu30950/hls_bizflycloud:latest
+      build: .
+      container_name: hls_bizflycloud
+      restart: always
+      ports:
+        - '8989:8989'
+      volumes:
+        - ./.env:/app/.env
