@@ -1,5 +1,5 @@
 # Sử dụng hình ảnh Node.js chính thức với các gói bổ sung cần thiết cho Puppeteer
-FROM node:20-alpine
+FROM node:20-alpine AS dev
 
 # Cài đặt các phụ thuộc cho Puppeteer
 RUN apk add --no-cache \
