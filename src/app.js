@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.get('/', (req, res) => {
-    res.render('index'); 
+    res.render('index');
 });
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../views'));
@@ -19,7 +19,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
+//deploy
 
 
 module.exports = app;
