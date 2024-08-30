@@ -47,8 +47,9 @@ async function downloadVideo(uri, downloadURL, cookies, outputDir, fileName) {
 async function getToken() {
     let browser;
     browser = await puppeteer.launch({
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium-browser',
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'] // Thêm các flag để chạy trong Docker
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
     await page.goto('http://113.161.166.85:81/doc/page/login.asp?_1724463823167', { waitUntil: 'networkidle2' });

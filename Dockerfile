@@ -1,32 +1,31 @@
-# Sử dụng node image từ Alpine cho môi trường production
-FROM node:20-alpine AS dev
+# Sử dụng hình ảnh Node.js chính thức với các gói bổ sung cần thiết cho Puppeteer
+FROM node:20-alpine
 
-# Thiết lập thư mục làm việc
-WORKDIR /app
-
-# Cài đặt các phụ thuộc hệ thống cần thiết cho Puppeteer
+# Cài đặt các phụ thuộc cho Puppeteer
 RUN apk add --no-cache \
     chromium \
     nss \
     freetype \
     harfbuzz \
-    ttf-dejavu \
-    # Thêm bất kỳ phụ thuộc nào khác cần thiết
-    && npm install -g puppeteer
+    ca-certificates \
+    ttf-freefont
 
-# Sao chép package.json và package-lock.json
+# Thiết lập thư mục làm việc
+WORKDIR /app
+
+# Sao chép file package.json và package-lock.json vào Docker image
 COPY package*.json ./
 
-# Cài đặt các phụ thuộc Node.js
+# Cài đặt các phụ thuộc từ npm
 RUN npm install
 
-# Sao chép mã nguồn ứng dụng vào container
+# Sao chép toàn bộ mã nguồn vào Docker image
 COPY . .
 
-# Cấu hình Puppeteer để sử dụng Chromium cài sẵn
+# Thiết lập biến môi trường cho Puppeteer để sử dụng Chromium đã cài đặt
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Mở cổng ứng dụng
+# Expose port
 EXPOSE 8989
 
 # Chạy ứng dụng
