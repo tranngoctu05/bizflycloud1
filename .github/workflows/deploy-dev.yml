@@ -38,9 +38,9 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          port: ${{ secrets.SERVER_PORT }}
+          port: ${{ secrets.SERVER_PORT  }}
           script: |
-           cd hls_bizflycloud
+           cd  hls_bizflycloud
            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker-compose pull
            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker-compose up -d
            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker image prune -f
