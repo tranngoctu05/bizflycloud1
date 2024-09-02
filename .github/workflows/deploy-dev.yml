@@ -43,4 +43,4 @@ jobs:
            cd  hls_bizflycloud
            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker-compose pull
            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker-compose up -d
-           echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S docker image prune -f
+           echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S `
